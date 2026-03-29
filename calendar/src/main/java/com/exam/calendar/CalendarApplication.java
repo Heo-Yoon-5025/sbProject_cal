@@ -9,7 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.exam.calendar.event.AbstractEvent;
 import com.exam.calendar.event.Event;
+import com.exam.calendar.event.EventType;
 import com.exam.calendar.event.Meeting;
+import com.exam.calendar.event.Schedule;
 import com.exam.calendar.event.Todo;
 
 // 스프링 부트 애플리케이션의 시작 클래스임을 나타내는 어노테이션
@@ -17,6 +19,8 @@ import com.exam.calendar.event.Todo;
 public class CalendarApplication {
 
 	public static void main(String[] args) {
+		Schedule schedule = new Schedule();
+
 		// AbstractEvent 타입을 담는 리스트 생성
 		List<AbstractEvent> list = new ArrayList<>();
 
@@ -36,20 +40,21 @@ public class CalendarApplication {
 				"스터디");
 
 		// 리스트에 Meeting 추가
-		list.add(meeting01);
+		schedule.add(meeting01);
 
 		// Todo 객체 생성
 		Todo todo01 = new Todo(
 				2,
 				"todo01",
-				ZonedDateTime.now(),
-				ZonedDateTime.now().plusHours(2),
+				ZonedDateTime.now().plusHours(3),
+				ZonedDateTime.now().plusHours(4),
 				"할 일 적기");
 
 		// 리스트에 Todo 추가
-		list.add(todo01);
+		schedule.add(todo01);
 
-		// 리스트에 담긴 모든 이벤트에 대해 print() 메서드 호출
-		list.forEach(Event::print);
+		schedule.printAll();
+		;
+
 	}
 }
